@@ -101,3 +101,48 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## user_problem_statement: Redesign the full-screen menu, remove all Chronicle ghost typography, set the main surface to hsl(0, 0%, 3%), add a scrub-linked layered footer reveal with parallax depth, improve cursor/logo/header hamburger, add claims imagery and mock newsletter details.
+## backend:
+##   - task: "Existing backend compatibility"
+##     implemented: true
+##     working: "NA"
+##     file: "backend/server.py"
+##     stuck_count: 0
+##     priority: "low"
+##     needs_retesting: false
+##     status_history:
+##         -working: "NA"
+##         -agent: "main"
+##         -comment: "No backend routes or integrations changed; frontend-only refinement."
+##
+## frontend:
+##   - task: "Visual refinement and layered footer transition"
+##     implemented: true
+##     working: true
+##     file: "frontend/src/components/Footer.js"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Implemented near-black surface, Chronicle removal, editorial menu/header/cursor refinements, claims footer, and GSAP ScrollTrigger scrub animation. Production build passes and initial/footer visual states render."
+##
+## metadata:
+##   created_by: "main_agent"
+##   version: "1.1"
+##   test_sequence: 4
+##   run_ui: true
+##
+## test_plan:
+##   current_focus:
+##     - "Backend smoke compatibility (no backend changes)"
+##     - "Frontend footer reveal, menu, header, cursor, and Chronicle removal"
+##   stuck_tasks: []
+##   test_all: false
+##   test_priority: "high_first"
+##
+## agent_communication:
+##     -agent: "main"
+##     -message: "First implementation value added. Backend unchanged; frontend build passed. Verify footer scroll-layer depth and existing exhibition/menu/bag/contact flows."

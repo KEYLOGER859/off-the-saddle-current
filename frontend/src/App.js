@@ -1,78 +1,68 @@
 import { useCallback, useRef, useState } from "react";
 import "@/App.css";
-import { products } from "@/data/products";
 import { Header } from "@/components/Header";
-import { Exhibition } from "@/components/Exhibition";
-import { BottomUI } from "@/components/BottomUI";
+import { Home } from "@/components/Home";
+import { Chronicle } from "@/components/Chronicle";
 import { Cursor } from "@/components/Cursor";
-import { ProductView } from "@/components/ProductView";
 import { MenuOverlay } from "@/components/MenuOverlay";
 import { BagDrawer } from "@/components/BagDrawer";
 import { ContactOverlay } from "@/components/ContactOverlay";
+import { PageWipe } from "@/components/PageWipe";
 
 export default function App() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const [viewing, setViewing] = useState(null);
-  const [dimmed, setDimmed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [bagOpen, setBagOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [chronicleOpen, setChronicleOpen] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const [bag, setBag] = useState([]);
-  const exhibitionRef = useRef(null);
-
-  const openProduct = useCallback((id, sourceEl) => {
-    const index = products.findIndex((p) => p.id === id);
-    setViewing({ product: products[index], index, sourceEl });
-    setDimmed(true);
+  const wipeRef = useRef(null);
+  const transition = useCallback((change, selector) => {
+    if (wipeRef.current) return wipeRef.current.transition(change, selector);
+    return false;
   }, []);
 
-  const navigate = useCallback((dir) => {
-    setViewing((v) => {
-      if (!v) return v;
-      const next = (v.index + dir + products.length) % products.length;
-      const product = products[next];
-      exhibitionRef.current?.glideTo(next, { immediate: true });
-      const el = document.querySelector(`[data-object-id="${product.id}"]`);
-      return { product, index: next, sourceEl: el || v.sourceEl };
-    });
-  }, []);
-
-  const addToBag = useCallback((product) => {
-    setBag((b) => [...b, product]);
-  }, []);
-
-  const removeFromBag = useCallback((idx) => {
-    setBag((b) => b.filter((_, i) => i !== idx));
-  }, []);
+  const addToBag = useCallback((product) => setBag((b) => [...b, product]), []);
+  const removeFromBag = useCallback((idx) => setBag((b) => b.filter((_, i) => i !== idx)), []);
+  const openChronicle = useCallback(() => {
+    if (wipeRef.current?.isRunning) return;
+    if (chronicleOpen && !contactOpen) { setMenuOpen(false); return; }
+    transition(() => { setChronicleOpen(true); setContactOpen(false); setMenuOpen(false); }, ".chronicle.is-open");
+  }, [chronicleOpen, contactOpen, transition]);
+  const closeChronicle = useCallback(() => {
+    if (!chronicleOpen && !contactOpen) return;
+    transition(() => { setChronicleOpen(false); setContactOpen(false); setMenuOpen(false); }, "[data-testid='home-view']");
+  }, [chronicleOpen, contactOpen, transition]);
+  const openContact = useCallback(() => transition(() => { setContactOpen(true); setMenuOpen(false); }, "[data-testid='contact-overlay']"), [transition]);
+  const closeContact = useCallback(() => transition(() => setContactOpen(false), chronicleOpen ? ".chronicle.is-open" : "[data-testid='home-view']"), [chronicleOpen, transition]);
 
   return (
-    <div className="app" data-testid="objects-marketplace">
-      <Header bagCount={bag.length} onMenu={() => setMenuOpen(true)} onBag={() => setBagOpen(true)} />
-      <Exhibition
-        ref={exhibitionRef}
-        products={products}
-        onOpen={openProduct}
-        onActiveChange={setActiveIndex}
-        onDragChange={setDragging}
-        dimmed={dimmed || menuOpen || bagOpen || contactOpen}
+    <div className="app" data-testid="objects-marketplace" data-page={contactOpen ? "contact" : chronicleOpen ? "chronicles" : "home"}>
+      <Header
+        bagCount={bag.length}
+        menuOpen={menuOpen}
+        chronicleOpen={chronicleOpen}
+        onMenu={() => setMenuOpen(true)}
+        onBag={() => setBagOpen(true)}
+        onHome={closeChronicle}
       />
-      <BottomUI index={activeIndex} total={products.length} dragging={dragging} hidden={!!viewing} />
-      {viewing && (
-        <ProductView
-          product={viewing.product}
-          index={viewing.index}
-          total={products.length}
-          sourceEl={viewing.sourceEl}
-          onExitStart={() => setDimmed(false)}
-          onClosed={() => setViewing(null)}
-          onAddToBag={addToBag}
-          onNavigate={navigate}
-        />
-      )}
-      <MenuOverlay open={menuOpen} onClose={() => setMenuOpen(false)} onContact={() => setContactOpen(true)} />
+      <Home onExplore={openChronicle} />
+      <Chronicle
+        open={chronicleOpen}
+        overlayDimmed={menuOpen || bagOpen || contactOpen}
+        onAddToBag={addToBag}
+        onClose={closeChronicle}
+        onDragChange={setDragging}
+      />
+      <MenuOverlay
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onContact={openContact}
+        onChronicles={openChronicle}
+      />
       <BagDrawer open={bagOpen} bag={bag} onClose={() => setBagOpen(false)} onRemove={removeFromBag} />
-      <ContactOverlay open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ContactOverlay open={contactOpen} onClose={closeContact} />
+      <PageWipe ref={wipeRef} />
       <Cursor dragging={dragging} />
     </div>
   );

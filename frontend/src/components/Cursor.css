@@ -1,0 +1,5 @@
+.nucleus-cursor { position: fixed; top: 0; left: 0; width: 0; height: 0; z-index: 1000; pointer-events: none; opacity: 0; }
+.nucleus-cursor__shape { position: absolute; display: grid; place-items: center; width: 20px; height: 20px; border: 1px solid var(--rust); border-radius: 50%; transform: translate(-50%, -50%); }
+.nucleus-cursor__dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--rust); }
+.nucleus-cursor__label { color: hsl(0,0%,3%); font: 9px var(--font-mono); text-transform: uppercase; letter-spacing: 0; opacity: 0; }
+@media (hover: none), (pointer: coarse) { .nucleus-cursor { display: none; } }

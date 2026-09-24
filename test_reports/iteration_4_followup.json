@@ -1,0 +1,28 @@
+{
+  "type": "Main-agent post-fix browser verification",
+  "original_report": "/app/test_reports/iteration_4.json",
+  "status": "all_reported_issues_fixed_and_verified",
+  "verification_log": "/root/.emergent/automation_output/20260924_162014/console_20260924_162014.log",
+  "fixes": [
+    "Reset GSAP absolute pixel offsets in addition to percentage offsets; remove initial CSS transform and confirm actual full viewport coverage before committing page state",
+    "Reject interrupted cover tweens rather than treating interruption as successful coverage",
+    "Use content-width menu navigation and explicit responsive spacing to separate logo and menu navigation bounds"
+  ],
+  "swap_coverage_checks": [
+    {"flow":"Home -> Chronicles","covered":true,"panel_top":0,"panel_bottom":800,"panel_left":0,"panel_right":1920},
+    {"flow":"Chronicles -> Home","covered":true,"panel_top":0,"panel_bottom":800,"panel_left":0,"panel_right":1920},
+    {"flow":"Menu -> Chronicles","covered":true,"panel_top":0,"panel_bottom":800,"panel_left":0,"panel_right":1920},
+    {"flow":"Menu -> Contact","covered":true,"panel_top":0,"panel_bottom":800,"panel_left":0,"panel_right":1920},
+    {"flow":"Contact -> Chronicles","covered":true,"panel_top":0,"panel_bottom":800,"panel_left":0,"panel_right":1920}
+  ],
+  "responsive_menu_checks": [
+    {"width":320,"logo_nav_overlap":false,"horizontal_overflow":false},
+    {"width":768,"logo_nav_overlap":false,"horizontal_overflow":false},
+    {"width":1024,"logo_nav_overlap":false,"horizontal_overflow":false},
+    {"width":1440,"logo_nav_overlap":false,"horizontal_overflow":false},
+    {"width":1920,"logo_nav_overlap":false,"horizontal_overflow":false}
+  ],
+  "unresolved_reported_bugs": [],
+  "existing_limitations": ["Contact/newsletter submissions are MOCKED", "Checkout is unimplemented", "Existing product photos are 848x1264; high-resolution and alternate photos await user assets"],
+  "user_visual_acceptance": "pending"
+}

@@ -1,0 +1,94 @@
+/* Scoped to the existing Chronicles overlay. Shared site styling is untouched. */
+.chronicle {
+  --chronicle-background: hsl(0, 0%, 3%);
+  background: var(--chronicle-background);
+  overscroll-behavior: none;
+  isolation: isolate;
+  transition: none;
+}
+.chronicle .ex-stage {
+  position: absolute;
+  outline: none;
+  contain: layout paint;
+  overscroll-behavior: none;
+  will-change: auto;
+}
+.chronicle .ex-proxy { position: absolute; }
+.chronicle .obj {
+  will-change: transform;
+  transform-origin: center;
+  outline: none;
+}
+.chronicle .obj__frame {
+  border-radius: 0;
+  box-shadow: none;
+  background: #151413;
+}
+.chronicle .obj__img {
+  left: -13%;
+  top: -25.6%;
+  width: 126%;
+  height: 151.2%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.94);
+  transition: none;
+  pointer-events: none;
+}
+.chronicle .obj__identity {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  width: calc(100% - 56px);
+  max-width: 460px;
+  color: var(--bone);
+  pointer-events: none;
+  opacity: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 1px 3px #000;
+}
+.chronicle .obj__number {
+  display: block;
+  margin-bottom: 12px;
+  font: 11px var(--font-mono);
+  color: var(--bone);
+  letter-spacing: 0;
+}
+.chronicle .obj__identity h2 {
+  margin: 0;
+  font: 400 52px/1.08 var(--font-display);
+  letter-spacing: 0;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+}
+.chronicle .obj__name-inner { display: block; transform: translateY(112%); }
+.chronicle .obj__identity p {
+  margin: 13px 0 0;
+  font: 10px/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--bone);
+}
+.chronicle .obj__open { position: absolute; right: 24px; top: 24px; width: 44px; height: 44px; border: 1px solid rgba(244,241,234,.65); border-radius: 50%; display: grid; place-items: center; color: var(--bone); background: rgba(7,7,7,.35); opacity: 0; }
+.chronicle .obj__open:hover { background: var(--rust); border-color: var(--rust); }
+.chronicle .obj__open:focus-visible { opacity: 1 !important; outline: 1px solid var(--bone); outline-offset: 4px; }
+.chronicle .obj:focus-visible .obj__frame { outline: 1px solid var(--rust); outline-offset: 5px; }
+.chronicle-index { position: absolute; left: 36px; bottom: 8px; z-index: 92; display: flex; align-items: center; gap: 20px; height: 30px; }
+.chronicle-index[hidden], .chronicle-index__numbers[hidden] { display: none; }
+.chronicle-index button { position: relative; border: 0; background: none; color: var(--bone-2); font: 10px var(--font-mono); letter-spacing: 0; padding: 7px 4px; transition: color .25s ease; }
+.chronicle-index button:hover, .chronicle-index button.is-active { color: var(--bone); }
+.chronicle-index button:focus-visible { outline: 1px solid var(--rust); outline-offset: 3px; }
+.chronicle-index__toggle { display: flex; align-items: center; gap: 8px; text-transform: uppercase; font-size: 8px !important; }
+.chronicle-index__numbers { display: flex; align-items: center; gap: 16px; }
+.chronicle-index__numbers button.is-active::after { content: ""; position: absolute; left: 4px; right: 4px; bottom: 2px; height: 1px; background: var(--rust); }
+@media (max-width: 600px) {
+  .chronicle .obj__identity { left: 18px; bottom: 20px; width: calc(100% - 36px); }
+  .chronicle .obj__identity h2 { font-size: 34px; }
+  .chronicle .obj__identity p { font-size: 8px; margin-top: 8px; }
+  .chronicle .obj__number { font-size: 9px; margin-bottom: 7px; }
+  .chronicle-index { left: 20px; gap: 14px; bottom: 7px; }
+  .chronicle-index__numbers { gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chronicle, .chronicle .obj__identity { transition: none; }
+}

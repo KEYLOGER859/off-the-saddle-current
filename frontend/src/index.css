@@ -21,16 +21,17 @@
     --font-mono: "DM Mono", "SFMono-Regular", Menlo, monospace;
 }
 
+/* ---------- document scroll ---------- */
 html {
-    overflow-y: hidden;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 html.scroll-y {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: auto;
 }
 html.scroll-y body {
     height: auto;
@@ -38,7 +39,7 @@ html.scroll-y body {
 html,
 body {
     margin: 0;
-    background: var(--ink);
+    background: hsl(0, 0%, 3%);
     color: var(--bone);
     height: 100%;
     -webkit-font-smoothing: antialiased;

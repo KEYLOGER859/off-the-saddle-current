@@ -1,0 +1,50 @@
+/* Fullscreen menu refinements only — Chronicles and other page type stay untouched. */
+.menu.menu { --font-mono: "Manrope", sans-serif; font-family: "Manrope", sans-serif; padding-top: 0; }
+.menu .menu__nav { width: max-content; max-width: calc(54vw - 100px); }
+.menu .menu__link,
+.menu .menu__link:hover,
+.menu .menu__link:focus,
+.menu .menu__link.is-current { text-decoration: none !important; border: 0; box-shadow: none; background-image: none; }
+.menu .menu__link::after { content: none !important; display: none !important; border: 0; }
+.menu .menu__line { font-family: "Instrument Serif", Georgia, serif; font-size: 100px; font-weight: 400; line-height: 1.05; letter-spacing: 0; }
+.menu .menu__line-inner { transition: none; }
+.menu .menu__link:hover .menu__line-inner { transform: none; }
+.menu .menu__link.is-current .menu__line-inner { font-style: normal; }
+.menu .menu__link:focus-visible { outline: 1px solid var(--rust); outline-offset: 7px; }
+.menu .menu__link:hover { color: var(--rust); }
+.menu .menu__num { font-family: "Manrope", sans-serif; font-size: 11px; font-weight: 400; padding-top: 14px; letter-spacing: 0; }
+.menu .menu__foot, .menu .menu__eyebrow, .menu .menu__close { font-family: "Manrope", sans-serif; letter-spacing: 0; font-weight: 400; }
+.menu .menu__foot { color: var(--bone-2); font-size: 10px; }
+.menu .menu__brand { position: absolute; right: 6vw; top: 50%; transform: translateY(-50%); width: min(39vw, 600px); height: min(82vh, 780px); pointer-events: none; }
+.menu .menu__brand img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.menu .menu__instagram { display: inline-flex; align-items: center; gap: 12px; color: var(--bone); text-transform: none; text-decoration: none; transition: color .25s ease; }
+.menu .menu__instagram:hover { color: var(--rust); }
+.menu .menu__instagram:focus-visible { outline: 1px solid var(--rust); outline-offset: 5px; }
+@media (max-width: 1200px) {
+  .menu .menu__line { font-size: 82px; }
+  .menu .menu__link { gap: 20px; }
+}
+@media (max-width: 900px) {
+  .menu .menu__line { font-size: 68px; }
+  .menu .menu__nav { margin-left: 3vw; }
+}
+@media (max-width: 700px) {
+  .menu.menu { justify-content: flex-start; padding: 196px 24px 100px; overflow-y: auto; }
+  .menu::before { left: 24px; right: 24px; top: 62px; }
+  .menu .menu__brand { width: 164px; height: 176px; top: 4px; right: 14px; transform: none; }
+  .menu .menu__nav { margin: 0; max-width: none; }
+  .menu .menu__line { font-size: 54px; }
+  .menu .menu__link { gap: 18px; padding: 2px 0 8px; }
+  .menu .menu__num { padding-top: 8px; font-size: 10px; }
+  .menu .menu__close { top: 24px; right: 24px; z-index: 2; }
+  .menu .menu__foot { left: 24px; right: 24px; bottom: 22px; flex-wrap: wrap; align-items: flex-start; gap: 12px 20px; }
+  .menu .menu__eyebrow { flex-basis: 100%; }
+}
+@media (max-width: 700px) and (max-height: 720px) {
+  .menu.menu { padding-top: 172px; }
+  .menu .menu__line { font-size: 44px; }
+  .menu .menu__brand { height: 154px; }
+}
+@media (min-width: 701px) and (max-height: 650px) {
+  .menu .menu__line { font-size: 64px; }
+}

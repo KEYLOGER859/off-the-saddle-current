@@ -1,0 +1,47 @@
+.story-view { position: fixed; inset: 0; z-index: 220; overflow: auto; overscroll-behavior: contain; color: var(--bone); scrollbar-width: thin; scrollbar-color: var(--rust) transparent; }
+.story-view__veil { position: fixed; inset: 0; background: hsl(0,0%,3%); opacity: 0; pointer-events: none; }
+.story-view__close { position: fixed; top: 28px; right: 36px; z-index: 5; display: flex; align-items: center; gap: 18px; border: 0; background: none; color: var(--bone); font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: 0; padding: 8px 0; }
+.story-view__close:hover { color: var(--rust); }
+.story-view button:focus-visible { outline: 1px solid var(--rust); outline-offset: 5px; }
+.story-view__lead { position: relative; max-width: 1680px; margin: 0 auto; min-height: 100svh; padding: 72px 6vw 48px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 8vw; align-items: center; }
+.story-view__media { display: flex; justify-content: center; min-width: 0; }
+.story-hero-slot { position: relative; width: min(100%, calc((100svh - 120px) * .8)); aspect-ratio: 4 / 5; }
+.story-hero { position: absolute; inset: 0; overflow: hidden; will-change: transform; }
+.story-hero img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: center; }
+.story-info { min-width: 0; max-width: 500px; padding: 24px 0; }
+.story-info__eyebrow { color: var(--rust); text-transform: uppercase; margin: 0 0 24px; font: 10px var(--font-mono); letter-spacing: 0; }
+.story-info__name { margin: 0 0 32px; display: flex; flex-wrap: wrap; gap: 0 .22em; font: 400 64px/.98 var(--font-display); letter-spacing: 0; }
+.story-name-mask { overflow: hidden; display: inline-block; padding-bottom: .15em; }
+.story-name-inner { display: block; }
+.story-info__specs { margin: 0 0 28px; display: grid; gap: 15px; }
+.story-info__specs > div { display: grid; grid-template-columns: 76px 1fr; gap: 24px; font: 10px/1.65 var(--font-mono); letter-spacing: 0; }
+.story-info__specs dt { color: var(--bone-2); text-transform: uppercase; }
+.story-info__specs dd { margin: 0; }
+.story-info__description { font: 400 22px/1.45 var(--font-display); color: var(--bone-2); margin: 0 0 38px; max-width: 38ch; }
+.story-info__purchase { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid rgba(244,241,234,.18); padding-top: 24px; }
+.story-info__price { font: 400 28px var(--font-display); white-space: nowrap; }
+.story-info__add { border: 0; border-bottom: 1px solid var(--rust); background: none; color: var(--bone); padding: 12px 0; display: flex; align-items: center; gap: 22px; font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: 0; transition: color .25s ease; }
+.story-info__add:hover { color: var(--rust); }
+.story-info__add:disabled { color: var(--rust); }
+.story-info__confirmation { display: block; min-height: 18px; padding-top: 14px; color: var(--bone-2); font: 9px/1.5 var(--font-mono); }
+.story-view__photographs { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 120px 10%; max-width: 1440px; margin: 0 auto; padding: 100px 7vw 160px; }
+.story-photograph { margin: 0; min-width: 0; }
+.story-photograph:nth-child(even) { padding-top: 140px; }
+.story-photograph img { display: block; width: 100%; height: auto; }
+.story-photograph figcaption { margin-top: 18px; font: 10px/1.6 var(--font-mono); color: var(--bone-2); }
+@media (max-width: 1100px) {
+  .story-view__lead { gap: 5vw; padding-left: 5vw; padding-right: 5vw; }
+  .story-info__name { font-size: 52px; }
+  .story-info__description { font-size: 20px; }
+}
+@media (max-width: 700px) {
+  .story-view__close { top: 18px; right: 20px; font-size: 9px; }
+  .story-view__lead { display: flex; flex-direction: column; align-items: stretch; padding: 78px 24px 48px; gap: 40px; }
+  .story-hero-slot { width: 100%; max-width: 440px; }
+  .story-info { padding: 0; max-width: none; }
+  .story-info__name { font-size: 48px; margin-bottom: 28px; }
+  .story-info__specs > div { grid-template-columns: 68px 1fr; gap: 16px; }
+  .story-info__purchase { gap: 18px; }
+  .story-view__photographs { display: flex; flex-direction: column; gap: 72px; padding: 24px 24px 96px; }
+  .story-photograph:nth-child(even) { padding: 0; }
+}

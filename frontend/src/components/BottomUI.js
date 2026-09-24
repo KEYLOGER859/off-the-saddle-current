@@ -1,55 +1,19 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { useState } from "react";
 import { pad } from "@/data/products";
+import { Minus, Plus } from "lucide-react";
 
-export const BottomUI = ({ index, total, dragging, hidden }) => {
-  const rootRef = useRef(null);
-  const fillRef = useRef(null);
-
-  useEffect(() => {
-    gsap.fromTo(
-      rootRef.current.children,
-      { y: 16, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.4, stagger: 0.1, delay: 1.1 }
-    );
-  }, []);
-
-  useEffect(() => {
-    gsap.to(fillRef.current, {
-      scaleX: (index + 1) / total,
-      duration: 0.9,
-      ease: "expo.out",
-    });
-  }, [index, total]);
-
-  useEffect(() => {
-    gsap.to(rootRef.current, { opacity: hidden ? 0 : 1, duration: 0.6 });
-  }, [hidden]);
-
+export const BottomUI = ({ index, total, onSelect, hidden }) => {
+  const [expanded, setExpanded] = useState(true);
   return (
-    <div className={`bottom ${dragging ? "is-dragging" : ""}`} ref={rootRef}>
-      <div className="bottom__pager" data-testid="chronicle-pager">
-        <span className="bottom__bracket">[</span>
-        {Array.from({ length: total }).map((_, i) => (
-          <span
-            key={i}
-            className={`bottom__pg ${i === index ? "is-active" : ""}`}
-            data-testid={`chronicle-pg-${i}`}
-          >
-            {pad(i + 1)}
-          </span>
+    <nav className={`chronicle-index ${expanded ? "is-expanded" : ""}`} data-testid="chronicle-index" aria-label="Chronicle index" hidden={hidden}>
+      <button className="chronicle-index__toggle" type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-controls="chronicle-index-numbers" data-testid="chronicle-index-toggle" data-cursor="open">
+        Index {expanded ? <Minus size={10} aria-hidden="true" /> : <Plus size={10} aria-hidden="true" />}
+      </button>
+      <div id="chronicle-index-numbers" className="chronicle-index__numbers" data-testid="chronicle-index-numbers" hidden={!expanded}>
+        {Array.from({ length: total }, (_, i) => (
+          <button key={i} type="button" onClick={() => onSelect(i)} className={index === i ? "is-active" : ""} aria-label={`Explore Chronicle ${pad(i + 1)}`} aria-current={index === i ? "true" : undefined} data-testid={`chronicle-index-${i + 1}`} data-cursor="open">{pad(i + 1)}</button>
         ))}
-        <span className="bottom__bracket">]</span>
       </div>
-      <div className="bottom__right">
-        <div className="bottom__cue" data-testid="bottom-drag-cue">
-          <span className="bottom__cue-text">{dragging ? "Exploring" : "Drag · Arrow keys to explore"}</span>
-          <span className="bottom__arrow">→</span>
-        </div>
-        <div className="bottom__track" aria-hidden>
-          <div ref={fillRef} className="bottom__track-fill" style={{ transform: "scaleX(0)" }} />
-        </div>
-      </div>
-    </div>
+    </nav>
   );
 };

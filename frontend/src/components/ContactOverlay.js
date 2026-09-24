@@ -49,7 +49,6 @@ export const ContactOverlay = ({ open, onClose }) => {
 
   return (
     <div className="contact" ref={ref} data-testid="contact-overlay" aria-hidden={!open}>
-      <span className="contact__ghost" aria-hidden>Hello</span>
       <button className="contact__close" onClick={onClose} data-testid="contact-close-button" data-cursor="link" type="button">
         Close <span className="contact__close-x">×</span>
       </button>
@@ -75,6 +74,10 @@ export const ContactOverlay = ({ open, onClose }) => {
             <dd><a href="mailto:hello@offthesaddle.in" data-cursor="link" data-testid="contact-email">hello@offthesaddle.in</a></dd>
           </div>
           <div className="contact__row contact__reveal">
+            <dt>WhatsApp</dt>
+            <dd><a href="https://wa.me/919876543210" data-cursor="link">+91 98765 43210</a></dd>
+          </div>
+          <div className="contact__row contact__reveal">
             <dt>Instagram</dt>
             <dd><a href="https://instagram.com" target="_blank" rel="noreferrer" data-cursor="link">@offthesaddle</a></dd>
           </div>
@@ -84,7 +87,7 @@ export const ContactOverlay = ({ open, onClose }) => {
       <div className="contact__right">
         {sent ? (
           <p className="contact__sent contact__reveal" data-testid="contact-sent-message">
-            Thank you, {form.name ? form.name.split(" ")[0] : "friend"}. <span>We'll be in touch soon.</span>
+            Thank you, {form.name ? form.name.split(" ")[0] : "friend"}. <span>We will be in touch soon.</span>
           </p>
         ) : (
           <form className="contact__form" onSubmit={submit} data-testid="contact-form">

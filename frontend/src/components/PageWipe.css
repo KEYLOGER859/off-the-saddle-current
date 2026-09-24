@@ -1,0 +1,2 @@
+.page-wipe { position: fixed; inset: 0; z-index: 800; overflow: hidden; visibility: hidden; pointer-events: none; touch-action: none; }
+.page-wipe__panel { position: absolute; inset: 0; background: var(--rust); will-change: transform; }

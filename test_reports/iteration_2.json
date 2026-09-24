@@ -19,6 +19,6 @@
   "seed_data_creation": "None - static products.js (8 items)",
   "retest_needed": false,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Public URL https://objects-collection.preview.emergentagent.com. Custom cursor requires force=True on all clicks. Cards use data-testid=object-card-<id>. Modal cyclic navigation verified. Bag drawer uses .is-open class for open state; check that when asserting. Product prices: Ember 6800, Fault Line 24000, Kiln 3400, Bastar 5200, Rann 4600, Anvil 12500, Smoke Glass 7900, Tendril 3900.",
+  "context_for_next_testing_agent": "Public URL https://saddle-menu-overlay.preview.emergentagent.com. Custom cursor requires force=True on all clicks. Cards use data-testid=object-card-<id>. Modal cyclic navigation verified. Bag drawer uses .is-open class for open state; check that when asserting. Product prices: Ember 6800, Fault Line 24000, Kiln 3400, Bastar 5200, Rann 4600, Anvil 12500, Smoke Glass 7900, Tendril 3900.",
   "rca of the issue": "No issues found."
 }
